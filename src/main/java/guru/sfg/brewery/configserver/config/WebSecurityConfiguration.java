@@ -9,11 +9,17 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    /**
+     * Habilitamos la basic auth para poder usar el encrypt y decript
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeRequests().antMatchers("/**")
-                .permitAll().anyRequest().authenticated().and()
+                .authorizeRequests()
+                .anyRequest().authenticated()
+                .and()
                 .httpBasic();
     }
 }
